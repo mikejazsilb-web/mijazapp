@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Viewing | MIJAZ Apparel</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background-image: url("bck.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .film {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(20px, 4vw, 50px)
+                     clamp(12px, 3vw, 30px)
+                     clamp(120px, 15vw, 150px);
+        }
+
+        .content {
+            width: 100%;
+            max-width: 1100px;
+            padding: clamp(20px, 4vw, 45px);
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: clamp(15px, 2.5vw, 25px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .content h1 {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .content > p {
+            text-align: center;
+            font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+            color: #e5e5e5;
+            margin: 0 auto clamp(25px, 4vw, 40px);
+            line-height: 1.7;
+            max-width: 750px;
+        }
+
+        .film-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(15px, 2.5vw, 28px);
+        }
+
+        .film-card {
+            min-width: 0;
+            padding: clamp(12px, 2vw, 20px);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: clamp(12px, 2vw, 18px);
+            transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+
+        .film-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.13);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .film-card video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            background: black;
+        }
+
+        .film-card h2 {
+            font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+            margin-top: 16px;
+            margin-bottom: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .film-card p {
+            color: #e5e5e5;
+            font-size: clamp(0.875rem, 1.2vw, 1rem);
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .watch-button {
+            display: block;
+            width: 100%;
+            padding: clamp(10px, 1.5vw, 13px);
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            background: #00d9ff;
+            color: #111;
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
+            font-weight: bold;
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+            transition: 0.3s;
+        }
+
+        .watch-button:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(95%, 850px);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(3px, 0.8vw, 8px);
+            padding: clamp(7px, 1.2vw, 12px);
+            background: rgba(0, 0, 0, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: white;
+            padding: clamp(8px, 1vw, 12px)
+                     clamp(8px, 1.5vw, 18px);
+            border-radius: 12px;
+            background: transparent;
+            font-size: clamp(0.72rem, 1.1vw, 0.9rem);
+            text-align: center;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .bottom-nav a:hover,
+        .bottom-nav a:focus-visible {
+            background: #00d9ff;
+            color: #111;
+            outline: none;
+        }
+
+        .bottom-nav .logout {
+            color: #ff6b6b;
+        }
+
+        .bottom-nav .logout:hover,
+        .bottom-nav .logout:focus-visible {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                background-attachment: scroll;
+            }
+
+            .film {
+                align-items: flex-start;
+                padding: 25px 12px 145px;
+            }
+
+            .content {
+                padding: clamp(18px, 5vw, 28px);
+            }
+
+            .film-container {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .film-card video {
+                aspect-ratio: 16 / 9;
+            }
+
+            .bottom-nav {
+                bottom: 8px;
+                width: 98%;
+                gap: 4px;
+                padding: 8px 5px;
+                border-radius: 15px;
+            }
+
+            .bottom-nav a {
+                padding: 9px clamp(5px, 1.5vw, 9px);
+                font-size: clamp(0.68rem, 2.5vw, 0.8rem);
+            }
+        }
+
+        @media (max-width: 360px) {
+            .bottom-nav {
+                gap: 2px;
+                padding: 6px 3px;
+            }
+
+            .bottom-nav a {
+                padding: 8px 5px;
+                font-size: 0.66rem;
+            }
+
+            .content {
+                padding: 16px;
+            }
+
+            .film-card {
+                padding: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="bottom-nav">
+        <a href="home.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="product.html">Product</a>
+        <a href="contact.html">Contact</a>
+        <a href="film.html">Film Viewing</a>
+        <a href="index.html" class="logout">Logout</a>
+    </nav>
+
+    <section class="film">
+        <div class="content">
+
+            <h1>MIJAZ Apparel</h1>
+
+            <p>
+                Welcome to the MIJAZ Apparel film viewing page.
+                Explore our clothing collections and discover our
+                T-shirts, hoodies, shorts, and pants.
+            </p>
+
+            <div class="film-container">
+
+                <div class="film-card">
+                    <video controls preload="metadata" playsinline>
+                        <source src="film1.mp4" type="video/mp4">
+                        Your browser does not support HTML video.
+                    </video>
+
+                    <h2>T-Shirts</h2>
+
+                    <p>
+                        Discover our quality MIJAZ Apparel T-shirts,
+                        designed with comfort, style, and everyday wear in mind.
+                    </p>
+
+                    <a href="film1.mp4" class="watch-button">
+                        Watch T-Shirt Film
+                    </a>
+                </div>
+
+                <div class="film-card">
+                    <video controls preload="metadata" playsinline>
+                        <source src="film2.mp4" type="video/mp4">
+                        Your browser does not support HTML video.
+                    </video>
+
+                    <h2>Hoodies</h2>
+
+                    <p>
+                        Explore our stylish and comfortable MIJAZ Apparel
+                        hoodies, perfect for casual and fashionable looks.
+                    </p>
+
+                    <a href="film2.mp4" class="watch-button">
+                        Watch Hoodie Film
+                    </a>
+                </div>
+
+                <div class="film-card">
+                    <video controls preload="metadata" playsinline>
+                        <source src="film3.mp4" type="video/mp4">
+                        Your browser does not support HTML video.
+                    </video>
+
+                    <h2>Shorts</h2>
+
+                    <p>
+                        Check out our quality MIJAZ Apparel shorts,
+                        created for comfort, freedom of movement, and style.
+                    </p>
+
+                    <a href="film3.mp4" class="watch-button">
+                        Watch Shorts Film
+                    </a>
+                </div>
+
+                <div class="film-card">
+                    <video controls preload="metadata" playsinline>
+                        <source src="film4.mp4" type="video/mp4">
+                        Your browser does not support HTML video.
+                    </video>
+
+                    <h2>Pants</h2>
+
+                    <p>
+                        Explore our MIJAZ Apparel pants, combining
+                        comfortable fits, quality materials, and modern style.
+                    </p>
+
+                    <a href="film4.mp4" class="watch-button">
+                        Watch Pants Film
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

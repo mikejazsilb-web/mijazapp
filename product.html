@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products | MIJAZ Apparel</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            background-image: url("BACK1.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #101522;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .products {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: clamp(25px, 5vw, 50px)
+                     clamp(12px, 3vw, 30px)
+                     clamp(140px, 18vh, 180px);
+            text-align: center;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: clamp(20px, 4vw, 45px);
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: clamp(16px, 3vw, 25px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .content h1 {
+            font-size: clamp(30px, 5vw, 48px);
+            line-height: 1.2;
+            margin-bottom: 15px;
+            overflow-wrap: break-word;
+        }
+
+        .content > p {
+            font-size: clamp(15px, 1.8vw, 18px);
+            line-height: 1.7;
+            margin-bottom: clamp(25px, 4vw, 40px);
+            color: #f0f0f0;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: clamp(12px, 2vw, 22px);
+            align-items: stretch;
+        }
+
+        .product {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            padding: clamp(12px, 2vw, 20px);
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: clamp(14px, 2.5vw, 18px);
+            transition: transform 0.3s ease,
+                        background 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .product h2 {
+            font-size: clamp(17px, 2vw, 23px);
+            line-height: 1.35;
+            margin-bottom: 10px;
+            color: #00d9ff;
+            overflow-wrap: anywhere;
+        }
+
+        .product p {
+            font-size: clamp(14px, 1.5vw, 16px);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #f0f0f0;
+            flex-grow: 1;
+            overflow-wrap: anywhere;
+        }
+
+        .price {
+            font-size: clamp(17px, 2vw, 20px);
+            line-height: 1.4;
+            font-weight: bold;
+            color: white;
+            margin-top: auto;
+        }
+
+        .add-cart {
+            width: 100%;
+            min-height: 44px;
+            margin-top: 12px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #00d9ff;
+            color: #111;
+            font-size: clamp(14px, 1.5vw, 16px);
+            line-height: 1.4;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease,
+                        transform 0.3s ease;
+        }
+
+        .add-cart:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .add-cart:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 3px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: max(15px, env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(95%, 1000px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: clamp(4px, 1vw, 10px);
+            padding: clamp(8px, 1.5vw, 12px);
+            background: rgba(0, 0, 0, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+        }
+
+        .bottom-nav a {
+            flex: 0 1 auto;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            padding: clamp(10px, 1.4vw, 13px)
+                     clamp(10px, 1.8vw, 18px);
+            border-radius: 12px;
+            background: transparent;
+            font-size: clamp(12px, 1.3vw, 15px);
+            line-height: 1.3;
+            white-space: nowrap;
+            transition: background 0.3s ease,
+                        color 0.3s ease;
+        }
+
+        .bottom-nav a:hover,
+        .bottom-nav a:focus-visible {
+            background: #00d9ff;
+            color: black;
+            outline: none;
+        }
+
+        .bottom-nav .logout:hover,
+        .bottom-nav .logout:focus-visible {
+            background: #ff4545;
+            color: white;
+        }
+
+        @media (max-width: 900px) {
+            .product-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .products {
+                padding: 25px 12px 160px;
+            }
+
+            .content {
+                padding: clamp(18px, 5vw, 28px) 14px;
+            }
+
+            .content h1 {
+                font-size: clamp(28px, 7vw, 38px);
+            }
+
+            .content > p {
+                font-size: clamp(15px, 4vw, 17px);
+                margin-bottom: 25px;
+            }
+
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .product {
+                padding: clamp(14px, 4vw, 22px);
+            }
+
+            .product img {
+                aspect-ratio: 4 / 3;
+            }
+
+            .product h2 {
+                font-size: clamp(19px, 5vw, 23px);
+            }
+
+            .product p {
+                font-size: clamp(14px, 3.8vw, 16px);
+            }
+
+            .price {
+                font-size: 19px;
+            }
+
+            .add-cart {
+                font-size: 15px;
+                min-height: 46px;
+            }
+
+            .bottom-nav {
+                width: 96%;
+                bottom: max(8px, env(safe-area-inset-bottom));
+                padding: 8px;
+                gap: 5px;
+                border-radius: 16px;
+            }
+
+            .bottom-nav a {
+                flex: 1 1 auto;
+                padding: 10px 8px;
+                font-size: clamp(12px, 3.2vw, 14px);
+                border-radius: 9px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .products {
+                padding-left: 8px;
+                padding-right: 8px;
+                padding-bottom: 170px;
+            }
+
+            .content {
+                padding: 18px 10px;
+            }
+
+            .bottom-nav {
+                gap: 4px;
+                padding: 6px;
+            }
+
+            .bottom-nav a {
+                padding: 9px 6px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .products {
+                padding-top: 25px;
+                padding-bottom: 110px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .bottom-nav {
+                bottom: 8px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="product.html">Product</a>
+        <a href="contact.html">Contact</a>
+        <a href="film.html">Film Viewing</a>
+        <a href="index.html" class="logout">Logout</a>
+    </nav>
+
+    <main class="products">
+        <section class="content">
+
+            <h1>Our Products</h1>
+
+            <p>
+                Explore our collection of T-Shirts, Hoodies, Shorts, and Pants.
+            </p>
+
+            <div class="product-container">
+
+                <article class="product">
+                    <img src="product1.jpg" alt="Classic T-Shirt" loading="lazy">
+                    <h2>Classic T-Shirt</h2>
+                    <p>Simple and comfortable everyday T-Shirt.</p>
+                    <div class="price">₱350</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product2.jpg" alt="Oversized T-Shirt" loading="lazy">
+                    <h2>Oversized T-Shirt</h2>
+                    <p>Relaxed fit T-Shirt with a modern style.</p>
+                    <div class="price">₱400</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product3.jpg" alt="Graphic T-Shirt" loading="lazy">
+                    <h2>Graphic T-Shirt</h2>
+                    <p>Stylish graphic design for casual outfits.</p>
+                    <div class="price">₱450</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product4.jpg" alt="Basic T-Shirt" loading="lazy">
+                    <h2>Basic T-Shirt</h2>
+                    <p>Clean and simple T-Shirt for everyday wear.</p>
+                    <div class="price">₱300</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product5.jpg" alt="Premium T-Shirt" loading="lazy">
+                    <h2>Premium T-Shirt</h2>
+                    <p>Soft fabric with a comfortable premium fit.</p>
+                    <div class="price">₱500</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product6.jpg" alt="Street T-Shirt" loading="lazy">
+                    <h2>Street T-Shirt</h2>
+                    <p>Trendy T-Shirt made for a streetwear look.</p>
+                    <div class="price">₱450</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product7.jpg" alt="Classic Hoodie" loading="lazy">
+                    <h2>Classic Hoodie</h2>
+                    <p>The best comfortable hoodie for cool and casual days.</p>
+                    <div class="price">₱850</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product8.jpg" alt="Oversized Hoodie" loading="lazy">
+                    <h2>Oversized Hoodie</h2>
+                    <p>Relaxed oversized fit with a modern appearance.</p>
+                    <div class="price">₱950</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product9.jpg" alt="Premium Hoodie" loading="lazy">
+                    <h2>Premium Hoodie</h2>
+                    <p>Soft and warm hoodie with a premium design.</p>
+                    <div class="price">₱1,100</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product10.jpg" alt="Casual Shorts" loading="lazy">
+                    <h2>Casual Shorts</h2>
+                    <p>Lightweight shorts perfect for everyday activities.</p>
+                    <div class="price">₱400</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product11.jpg" alt="Sport Shorts" loading="lazy">
+                    <h2>Sport Shorts</h2>
+                    <p>Comfortable shorts designed for active use.</p>
+                    <div class="price">₱450</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product12.jpg" alt="Street Shorts" loading="lazy">
+                    <h2>Street Shorts</h2>
+                    <p>Modern shorts that complete a casual streetwear outfit.</p>
+                    <div class="price">₱500</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product13.jpg" alt="Classic Pants" loading="lazy">
+                    <h2>Classic Pants</h2>
+                    <p>Comfortable pants suitable for everyday wear.</p>
+                    <div class="price">₱650</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product14.jpg" alt="Cargo Pants" loading="lazy">
+                    <h2>Cargo Pants</h2>
+                    <p>Stylish cargo pants with a comfortable fit.</p>
+                    <div class="price">₱750</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product">
+                    <img src="product15.jpg" alt="Street Pants" loading="lazy">
+                    <h2>Street Pants</h2>
+                    <p>Modern pants designed for a stylish streetwear look.</p>
+                    <div class="price">₱800</div>
+                    <button class="add-cart" type="button">Add to Cart</button>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
