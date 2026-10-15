@@ -1,112 +1,387 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>About | MIJAZ Apparel</title>
+    <title>About Us | MIJAZZ APPAREL</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         html {
-            font-size: 16px;
             scroll-behavior: smooth;
         }
 
         body {
             min-height: 100vh;
-            min-height: 100dvh;
-            background-image: url("bck.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: #101522;
-            background-attachment: fixed;
             color: white;
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.72),
+                                rgba(0, 0, 0, 0.85)),
+                url("bck.png") center/cover fixed;
+            overflow-x: hidden;
         }
 
-        .about {
-            width: 100%;
-            min-height: 100vh;
-            min-height: 100dvh;
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .page {
+            width: min(1150px, 92%);
+            margin: auto;
+            padding: 35px 0 125px;
+        }
+
+        /* BRAND HEADER */
+
+        .brand-header {
             display: flex;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: clamp(18px, 4vw, 40px);
-            padding-bottom: clamp(125px, 17vh, 170px);
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 35px;
+            text-align: left;
         }
 
-        .content {
+        .brand-logo {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.2);
+        }
+
+        .brand-name {
+            font-size: clamp(25px, 4vw, 42px);
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .brand-tagline {
+            color: #00d9ff;
+            font-size: 13px;
+            letter-spacing: 4px;
+            margin-top: 8px;
+        }
+
+        /* GLASS EFFECT */
+
+        .glass {
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        /* HERO */
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 35px;
+            padding: 35px;
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            color: #00d9ff;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 5vw, 62px);
+            line-height: 1.08;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #00d9ff;
+        }
+
+        .hero p {
+            color: #e0e0e0;
+            font-size: 16px;
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        .hero-image {
             width: 100%;
-            max-width: 1000px;
-            padding: clamp(25px, 5vw, 50px);
-            background: rgba(255, 255, 255, 0.10);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: clamp(16px, 3vw, 25px);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            height: 390px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .content h1 {
-            font-size: clamp(30px, 5vw, 52px);
-            line-height: 1.2;
-            margin-bottom: clamp(18px, 3vw, 25px);
+        .primary-button,
+        .secondary-button {
+            display: inline-block;
+            text-decoration: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .primary-button {
+            color: black;
+            background: #00d9ff;
+            border: 1px solid #00d9ff;
+        }
+
+        .primary-button:hover {
+            background: white;
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        .secondary-button {
             color: white;
-            overflow-wrap: break-word;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            margin-left: 8px;
         }
 
-        .content > p {
-            font-size: clamp(15px, 1.8vw, 18px);
+        .secondary-button:hover {
+            background: white;
+            color: black;
+        }
+
+        /* SECTION HEADINGS */
+
+        .section-heading {
+            text-align: center;
+            margin: 55px 0 28px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(26px, 4vw, 36px);
+            margin-bottom: 12px;
+        }
+
+        .section-heading h2 span {
+            color: #00d9ff;
+        }
+
+        .section-heading p {
+            max-width: 650px;
+            margin: auto;
+            color: #cfcfcf;
             line-height: 1.8;
-            color: white;
-            margin-bottom: clamp(16px, 2.5vw, 22px);
-            overflow-wrap: break-word;
+            font-size: 14px;
         }
 
-        .info {
+        /* BRAND STORY */
+
+        .story {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            align-items: center;
+            gap: 30px;
+            padding: 28px;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 18px;
+        }
+
+        .story-text h2 {
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .story-text h2 span {
+            color: #00d9ff;
+        }
+
+        .story-text p {
+            color: #dedede;
+            line-height: 1.9;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .quote {
+            color: #00d9ff;
+            font-size: 19px;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        /* MISSION, VISION, GOAL */
+
+        .info-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: clamp(12px, 2vw, 20px);
-            margin-top: clamp(25px, 4vw, 35px);
+            gap: 20px;
         }
 
-        .box {
-            min-width: 0;
-            padding: clamp(18px, 3vw, 28px) clamp(14px, 2vw, 22px);
+        .info-card {
+            padding: 28px 23px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-7px);
+            border-color: #00d9ff;
+        }
+
+        .info-icon {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            color: #00d9ff;
+            background: rgba(0, 217, 255, 0.12);
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 21px;
+            margin-bottom: 14px;
+        }
+
+        .info-card p {
+            color: #d2d2d2;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        /* COLLECTION GALLERY */
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .collection-card {
+            overflow: hidden;
+            border-radius: 20px;
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: clamp(14px, 2.5vw, 18px);
-            transition: background 0.3s ease,
-                        transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.17);
+            transition: transform 0.3s, border-color 0.3s;
         }
 
-        .box:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-4px);
+        .collection-card:hover {
+            transform: translateY(-6px);
+            border-color: #00d9ff;
         }
 
-        .box h2 {
-            color: white;
-            margin-bottom: 12px;
-            font-size: clamp(18px, 2.2vw, 24px);
-            line-height: 1.3;
-            overflow-wrap: break-word;
+        .collection-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            transition: transform 0.5s;
         }
 
-        .box p {
-            font-size: clamp(14px, 1.5vw, 16px);
+        .collection-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .collection-info {
+            padding: 20px;
+        }
+
+        .collection-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .collection-info p {
+            color: #ccc;
             line-height: 1.7;
-            color: white;
-            margin: 0;
-            overflow-wrap: break-word;
+            font-size: 14px;
         }
+
+        /* VALUES STRIP */
+
+        .values {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        .value-item h3 {
+            color: #00d9ff;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .value-item p {
+            color: #ddd;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* CALL TO ACTION */
+
+        .cta {
+            text-align: center;
+            padding: 40px 25px;
+            margin-top: 55px;
+        }
+
+        .cta h2 {
+            font-size: clamp(26px, 4vw, 38px);
+            margin-bottom: 15px;
+        }
+
+        .cta h2 span {
+            color: #00d9ff;
+        }
+
+        .cta p {
+            color: #ddd;
+            line-height: 1.8;
+            margin: 0 auto 25px;
+            max-width: 600px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            color: #c4c4c4;
+            font-size: 12px;
+            line-height: 1.8;
+            padding: 30px 10px 0;
+        }
+
+        /* NAVBAR - PRESERVED */
 
         .bottom-nav {
             position: fixed;
@@ -158,55 +433,86 @@
             color: white;
         }
 
-        @media (max-width: 750px) {
-            .info {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+        @media (max-width: 800px) {
+            .hero {
+                grid-template-columns: 1fr;
             }
 
-            .box:last-child {
-                grid-column: 1 / -1;
+            .hero-image {
+                height: 350px;
+            }
+
+            .story {
+                grid-template-columns: 1fr;
+            }
+
+            .story-image {
+                height: 320px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collection-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
         @media (max-width: 600px) {
-            .about {
-                padding: 16px;
-                padding-bottom: 160px;
+            .page {
+                width: 94%;
+                padding-top: 25px;
             }
 
-            .content {
-                padding: clamp(22px, 5vw, 32px) clamp(16px, 4vw, 24px);
+            .brand-logo {
+                width: 65px;
+                height: 65px;
             }
 
-            .content h1 {
-                font-size: clamp(28px, 7vw, 38px);
+            .brand-name {
+                letter-spacing: 1px;
             }
 
-            .content > p {
-                font-size: clamp(15px, 4vw, 17px);
-                line-height: 1.75;
+            .brand-tagline {
+                font-size: 10px;
+                letter-spacing: 2px;
             }
 
-            .info {
+            .hero {
+                padding: 22px;
+                gap: 25px;
+            }
+
+            .hero-image {
+                height: 290px;
+            }
+
+            .story {
+                padding: 20px;
+            }
+
+            .story-image {
+                height: 260px;
+            }
+
+            .collection-grid {
                 grid-template-columns: 1fr;
-                gap: 14px;
-                margin-top: 25px;
             }
 
-            .box,
-            .box:last-child {
-                grid-column: auto;
-                width: 100%;
-                padding: 22px 18px;
+            .collection-card img {
+                height: 300px;
             }
 
-            .box h2 {
-                font-size: clamp(19px, 5vw, 23px);
+            .values {
+                grid-template-columns: 1fr;
             }
 
-            .box p {
-                font-size: clamp(14px, 3.8vw, 16px);
+            .secondary-button {
+                margin: 12px 0 0;
             }
+
+            /* ORIGINAL MOBILE NAVBAR PRESERVED */
 
             .bottom-nav {
                 width: 96%;
@@ -225,16 +531,6 @@
         }
 
         @media (max-width: 360px) {
-            .about {
-                padding-left: 12px;
-                padding-right: 12px;
-                padding-bottom: 170px;
-            }
-
-            .content {
-                padding: 22px 15px;
-            }
-
             .bottom-nav {
                 gap: 4px;
                 padding: 6px;
@@ -244,25 +540,14 @@
                 padding: 9px 6px;
                 font-size: 12px;
             }
-        }
 
-        @media (max-height: 500px) and (orientation: landscape) {
-            .about {
-                align-items: flex-start;
-                padding-top: 25px;
-                padding-bottom: 110px;
+            .brand-header {
+                gap: 10px;
             }
 
-            .content {
-                padding: 25px;
-            }
-
-            .content h1 {
-                font-size: clamp(28px, 5vh, 40px);
-            }
-
-            .bottom-nav {
-                bottom: 8px;
+            .brand-logo {
+                width: 55px;
+                height: 55px;
             }
         }
 
@@ -282,6 +567,257 @@
 
 <body>
 
+    <main class="page">
+
+        <header class="brand-header">
+            <img
+                src="logo.png"
+                alt="MIJAZZ APPAREL logo"
+                class="brand-logo"
+            >
+
+            <div>
+                <div class="brand-name">MIJAZZ APPAREL</div>
+                <div class="brand-tagline">WEAR BOLD. WEAR MIJAZZ.</div>
+            </div>
+        </header>
+
+        <section class="hero glass">
+            <div>
+                <div class="eyebrow">Discover Our Brand</div>
+
+                <h1>
+                    STYLE THAT<br>
+                    SPEAKS <span>FOR YOU.</span>
+                </h1>
+
+                <p>
+                    Welcome to MIJAZZ APPAREL, where style meets confidence.
+                    We believe that clothing is more than something you wear.
+                    It is a way to express your personality, show your
+                    individuality, and make every day your own.
+                </p>
+
+                <a href="product.html" class="primary-button">
+                    EXPLORE OUR COLLECTION
+                </a>
+
+                <a href="contact.html" class="secondary-button">
+                    CONTACT US
+                </a>
+            </div>
+
+            <img
+                class="hero-image"
+                src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1100&q=85"
+                alt="Fashion models wearing modern streetwear"
+                fetchpriority="high"
+            >
+        </section>
+
+        <section>
+            <div class="section-heading">
+                <h2>THE STORY BEHIND <span>MIJAZZ</span></h2>
+                <p>
+                    Get to know our identity, our inspiration, and what
+                    makes our clothing brand special.
+                </p>
+            </div>
+
+            <div class="story glass">
+                <img
+                    class="story-image"
+                    src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85"
+                    alt="Fashion model wearing a stylish outfit"
+                    loading="lazy"
+                >
+
+                <div class="story-text">
+                    <h2>More Than Fashion.<br><span>A Statement.</span></h2>
+
+                    <p>
+                        MIJAZZ APPAREL is built around the idea that
+                        everyone deserves to feel comfortable and confident
+                        in what they wear. Our brand embraces modern style,
+                        individuality, and creativity.
+                    </p>
+
+                    <p>
+                        From everyday essentials to bold streetwear looks,
+                        we aim to offer styles that fit different tastes
+                        and occasions. We want every customer to find
+                        clothing that feels personal and expresses who
+                        they are.
+                    </p>
+
+                    <p>
+                        Our goal is to create a brand that inspires people
+                        to dress with confidence and stay true to
+                        themselves.
+                    </p>
+
+                    <div class="quote">"Wear to Attract."</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-heading">
+                <h2>OUR <span>PURPOSE</span></h2>
+                <p>
+                    These principles guide our brand, our products,
+                    and the experience we want to give our customers.
+                </p>
+            </div>
+
+            <div class="info-grid">
+
+                <article class="info-card glass">
+                    <div class="info-icon" aria-hidden="true">✦</div>
+                    <h3>Our Mission</h3>
+                    <p>
+                        To provide stylish, comfortable, and expressive
+                        clothing that helps customers show their
+                        individuality and feel confident in their
+                        everyday lives.
+                    </p>
+                </article>
+
+                <article class="info-card glass">
+                    <div class="info-icon" aria-hidden="true">◎</div>
+                    <h3>Our Vision</h3>
+                    <p>
+                        To become a recognizable clothing brand known
+                        for its distinctive style, customer satisfaction,
+                        creativity, and commitment to helping people
+                        express themselves through fashion.
+                    </p>
+                </article>
+
+                <article class="info-card glass">
+                    <div class="info-icon" aria-hidden="true">↗</div>
+                    <h3>Our Goal</h3>
+                    <p>
+                        To continue developing our clothing collection,
+                        reach more customers, improve our services,
+                        and build lasting relationships with people
+                        who appreciate our style.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <section>
+            <div class="section-heading">
+                <h2>EXPLORE OUR <span>STYLE</span></h2>
+                <p>
+                    Discover fashion inspiration for different moods,
+                    looks, and everyday occasions.
+                </p>
+            </div>
+
+            <div class="collection-grid">
+
+                <article class="collection-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85"
+                        alt="Casual T-shirt fashion"
+                        loading="lazy"
+                    >
+                    <div class="collection-info">
+                        <h3>Everyday Essentials</h3>
+                        <p>
+                            Simple, versatile styles for everyday wear
+                            and effortless outfits.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="collection-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=85"
+                        alt="Casual hoodie apparel"
+                        loading="lazy"
+                    >
+                    <div class="collection-info">
+                        <h3>Streetwear Style</h3>
+                        <p>
+                            Modern casual looks inspired by comfort,
+                            individuality, and urban fashion.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="collection-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=85"
+                        alt="Modern fashion outfit inspiration"
+                        loading="lazy"
+                    >
+                    <div class="collection-info">
+                        <h3>Express Your Style</h3>
+                        <p>
+                            Find inspiration to combine pieces and
+                            create a look that represents you.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section>
+            <div class="values">
+
+                <div class="value-item glass">
+                    <h3>CONFIDENCE</h3>
+                    <p>
+                        Wear what makes you feel comfortable and
+                        confident in your own identity.
+                    </p>
+                </div>
+
+                <div class="value-item glass">
+                    <h3>CREATIVITY</h3>
+                    <p>
+                        Explore new combinations and express your
+                        personality through clothing.
+                    </p>
+                </div>
+
+                <div class="value-item glass">
+                    <h3>INDIVIDUALITY</h3>
+                    <p>
+                        Celebrate your unique taste and make
+                        every outfit your own.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="cta glass">
+            <h2>READY TO FIND YOUR <span>STYLE?</span></h2>
+
+            <p>
+                Discover clothing inspiration and explore the MIJAZZ
+                APPAREL collection. Make your everyday look a statement
+                of confidence and individuality.
+            </p>
+
+            <a href="product.html" class="primary-button">
+                SHOP THE COLLECTION
+            </a>
+        </section>
+
+        <footer class="footer">
+            <p>© 2026 MIJAZZ APPAREL. All rights reserved.</p>
+            <p>Wear Bold. Wear MIJAZZ.</p>
+        </footer>
+
+    </main>
+
     <nav class="bottom-nav" aria-label="Main navigation">
         <a href="home.html">Home</a>
         <a href="about.html">About</a>
@@ -290,64 +826,6 @@
         <a href="film.html">Film Viewing</a>
         <a href="index.html" class="logout">Logout</a>
     </nav>
-
-    <main class="about">
-        <section class="content">
-
-            <h1>About Us</h1>
-
-            <p>
-                MIJAZ Apparel is a clothing brand created to
-                provide customers with stylish, comfortable,
-                and quality clothing for everyday wear.
-                Our collection includes T-shirts, hoodies, pants,
-                and shorts designed for different styles,
-                occasions, and personalities.
-            </p>
-
-            <p>
-                We believe that clothing should be comfortable,
-                fashionable, and made with quality in mind.
-                MIJAZ Apparel aims to give customers a simple and
-                enjoyable shopping experience while offering
-                clothing that allows everyone to express their
-                own style.
-            </p>
-
-            <div class="info">
-
-                <div class="box">
-                    <h2>Our Mission</h2>
-                    <p>
-                        To provide quality T-shirts, hoodies,
-                        pants, and shorts that are comfortable,
-                        stylish, and suitable for everyday wear.
-                    </p>
-                </div>
-
-                <div class="box">
-                    <h2>Our Vision</h2>
-                    <p>
-                        To become a trusted apparel brand known
-                        for quality, modern designs, comfort,
-                        and affordable fashion.
-                    </p>
-                </div>
-
-                <div class="box">
-                    <h2>Our Goal</h2>
-                    <p>
-                        To offer customers fashionable and
-                        comfortable clothing that helps them
-                        look confident and express their
-                        personal style.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-    </main>
 
 </body>
 </html>
